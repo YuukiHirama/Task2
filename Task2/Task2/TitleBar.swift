@@ -23,12 +23,12 @@ class CustomView: UIView {
     let commonView = UIStackView(frame: .zero)
 
     // MARK: - Life cycle events -
-    /// カスタムビュー作成時に必要なもの
+    /// 指定イニシャライザ
     required override init(frame: CGRect) {
         super.init(frame: frame)
         self.commonInit()
     }
-    /// 何か
+    /// 必須イニシャライザ
     required init(coder aDecoder: NSCoder) {
         super.init(coder:aDecoder)!
         self.commonInit()
