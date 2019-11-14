@@ -15,6 +15,7 @@
 		51D7E210237BEB6000516D2F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 51D7E20E237BEB6000516D2F /* LaunchScreen.storyboard */; };
 		51D7E21B237BEB6000516D2F /* Task2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51D7E21A237BEB6000516D2F /* Task2Tests.swift */; };
 		51D7E226237BEB6100516D2F /* Task2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51D7E225237BEB6100516D2F /* Task2UITests.swift */; };
+		51D7E234237C0E8B00516D2F /* TitleBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51D7E233237C0E8B00516D2F /* TitleBar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		51D7E221237BEB6100516D2F /* Task2UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Task2UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		51D7E225237BEB6100516D2F /* Task2UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task2UITests.swift; sourceTree = "<group>"; };
 		51D7E227237BEB6100516D2F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		51D7E233237C0E8B00516D2F /* TitleBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleBar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 				51D7E203237BEB5F00516D2F /* AppDelegate.swift */,
 				51D7E205237BEB5F00516D2F /* SceneDelegate.swift */,
 				51D7E207237BEB5F00516D2F /* ViewController.swift */,
+				51D7E233237C0E8B00516D2F /* TitleBar.swift */,
 				51D7E209237BEB5F00516D2F /* Main.storyboard */,
 				51D7E20C237BEB6000516D2F /* Assets.xcassets */,
 				51D7E20E237BEB6000516D2F /* LaunchScreen.storyboard */,
@@ -259,6 +262,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				51D7E234237C0E8B00516D2F /* TitleBar.swift in Sources */,
 				51D7E208237BEB5F00516D2F /* ViewController.swift in Sources */,
 				51D7E204237BEB5F00516D2F /* AppDelegate.swift in Sources */,
 				51D7E206237BEB5F00516D2F /* SceneDelegate.swift in Sources */,
