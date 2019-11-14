@@ -21,16 +21,6 @@ class CustomView: UIView {
     lazy private var settingButton:UIButton = self.createSettingButton()
     /// 共通設定
     let commonView = UIStackView(frame: .zero)
-    
-    var title:String? {
-        get {
-            return titleLabel.text
-        }
-        set(title) {
-            titleLabel.text = title
-            self.setNeedsLayout()
-        }
-    }
 
     // MARK: - Life cycle events -
     /// カスタムビュー作成時に必要なもの
