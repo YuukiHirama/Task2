@@ -70,7 +70,7 @@ class CustomView: UIView {
     /// タイトルラベルを作成
     private func createTitleLabel() -> UILabel {
         let label = UILabel(frame: CGRect.zero)
-        label.text = "前回ログイン日時 2019/11/07 12:00:00"
+        label.text = "前回ログイン日時2019/11/0712:00:00"
         label.font = UIFont.systemFont(ofSize: 16)
         label.textColor = UIColor.black
         return label
