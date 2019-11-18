@@ -12,7 +12,7 @@ class ViewController: UIViewController {
     
     // MARK: - Properties -
     /// カスタムビュー
-    lazy private var customView:CustomView = self.createCustomView()
+    private let customView:CustomView = CustomView()
 
     // MARK: - Life cycle events -
     // ビューの初期ロード
@@ -27,13 +27,6 @@ class ViewController: UIViewController {
         self.layoutCustomView()
     }
 
-    // MARK: - Create subviews -
-    /// カスタムビュー作成
-    private func createCustomView() -> CustomView {
-        let rect = CustomView(frame: CGRect.zero)
-        return rect;
-    }
-
     // MARK: - Layout subviews -
     /// カスタムビューのサイズと位置指定
     private func layoutCustomView() {
@@ -42,7 +35,7 @@ class ViewController: UIViewController {
             customView.frame.origin = self.view.safeAreaLayoutGuide.layoutFrame.origin
             customView.frame.size = CGSize(width: self.view.safeAreaLayoutGuide.layoutFrame.width, height: 44)
         }else{
-            // iOS11よりも下だったら
+        // iOS11よりも下だったら
             customView.frame.origin = self.view.frame.origin
             customView.frame.size = CGSize(width: self.view.frame.width, height: 44)
         }

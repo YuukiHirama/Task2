@@ -12,21 +12,22 @@ class CustomView: UIView {
 
     // MARK: - Properties -
     /// タイトルラベル
-    lazy private var titleLabel:UILabel = self.createTitleLabel()
+    private let titleLabel:UILabel = UILabel()
     /// ログインボタン
-    lazy private var logInButton:UIButton = self.createlLogInButton()
+    private let logInButton:UIButton = UIButton(type: UIButton.ButtonType.system)
     /// ログアウトボタン
-    lazy private var logOutButton:UIButton = self.createLogOutButton()
+    private let logOutButton:UIButton = UIButton(type: UIButton.ButtonType.system)
     /// 各種設定ボタン
-    lazy private var settingButton:UIButton = self.createSettingButton()
+    private let settingButton:UIButton = UIButton(type: UIButton.ButtonType.system)
     /// 共通設定
-    let commonView = UIStackView(frame: .zero)
+    private let commonView = UIStackView(frame: .zero)
 
     // MARK: - Life cycle events -
     /// 指定イニシャライザ
     required override init(frame: CGRect) {
         super.init(frame: frame)
         self.commonInit()
+
     }
     /// 必須イニシャライザ
     required init(coder aDecoder: NSCoder) {
@@ -36,14 +37,21 @@ class CustomView: UIView {
 
     /// 共通初期化処理
     private func commonInit() {
-        self.backgroundColor = UIColor(white: 0.9, alpha: 1.0)
-        logOutButton.isHidden = true
+        
+        createTitleLabel()
+        createlLogInButton()
+        createLogOutButton()
+        createSettingButton()
         
         self.addSubview(commonView)
         self.addSubview(titleLabel)
         self.addSubview(logInButton)
         self.addSubview(logOutButton)
         self.addSubview(settingButton)
+        
+        self.backgroundColor = UIColor(white: 0.9, alpha: 1.0)
+        logInButton.isHidden = false
+        logOutButton.isHidden = true
     }
     
     /// 格アイテムのレイアウト調整
@@ -58,35 +66,27 @@ class CustomView: UIView {
 
     // MARK: - Create subviews -
     /// タイトルラベルを作成
-    private func createTitleLabel() -> UILabel {
-        let label = UILabel(frame: CGRect.zero)
-        label.text = "前回ログイン日時2019/11/0712:00:00"
-        label.font = UIFont.systemFont(ofSize: 16)
-        label.textColor = UIColor.black
-        return label
+    private func createTitleLabel(){
+        titleLabel.text = "前回ログイン日時2019/11/0712:00:00"
+        titleLabel.font = UIFont.systemFont(ofSize: 16)
+        titleLabel.textColor = UIColor.black
     }
     /// ログインボタンを作成
-    private func createlLogInButton() -> UIButton {
-        let button = UIButton(type: UIButton.ButtonType.system)
-        button.setTitle("ログイン",for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
-        button.addTarget(self, action: #selector(pushLogIn), for: .touchUpInside)
-        return button
+    private func createlLogInButton(){
+        logInButton.setTitle("ログイン",for: .normal)
+        logInButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        logInButton.addTarget(self, action: #selector(pushLogIn), for: .touchUpInside)
     }
     /// ログアウトボタンを作成
-    private func createLogOutButton() -> UIButton {
-        let button = UIButton(type: UIButton.ButtonType.system)
-        button.setTitle("ログアウト",for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
-        button.addTarget(self, action: #selector(pushLogOut), for: .touchUpInside)
-        return button
+    private func createLogOutButton(){
+        logOutButton.setTitle("ログアウト",for: .normal)
+        logOutButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        logOutButton.addTarget(self, action: #selector(pushLogOut), for: .touchUpInside)
     }
     /// 各種設定ボタンを作成
-    private func createSettingButton() -> UIButton {
-        let button = UIButton(type: UIButton.ButtonType.system)
-        button.setTitle("各種設定", for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
-        return button
+    private func createSettingButton(){
+        settingButton.setTitle("各種設定", for: .normal)
+        settingButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
     }
 
     // MARK: - Layout subviews -
