@@ -67,30 +67,30 @@ class CustomView: UIView {
         /// 設定ボタンサイズ取得
         let settingRect: CGSize = settingButton.sizeThatFits(CGSize(width: frame.width, height: CGFloat.greatestFiniteMagnitude))
         
-
-        settingButton.frame = CGRect(x: width-70, y: 30, width: settingRect.width, height: settingRect.height)
+        
+        settingButton.frame = CGRect(x: width - (settingRect.width + 10), y: 30, width: settingRect.width, height: settingRect.height)
         
         logInButton.frame = CGRect(x: settingButton.frame.maxX - 130,y:30,width:logInRect.width, height: logInRect.height)
         
         logOutButton.frame = CGRect(x: settingButton.frame.maxX - 145,y:30,width:logOutRect.width, height: logOutRect.height)
         
-       ///ログイン状況によって表示方法を変える
-       if(loginFrag){
-        logInButton.isHidden = true
-        logOutButton.isHidden = false
-
+        ///ログイン状況によって表示方法を変える
+        if(loginFrag){
+            logInButton.isHidden = true
+            logOutButton.isHidden = false
+            
             if(width > 500){
                 titleLabel.frame = CGRect(x: logOutButton.frame.maxX - 350, y: 35, width: titleRect.width , height: titleRect.height)
             }else{
                 titleLabel.frame = CGRect(x: logOutButton.frame.maxX - 300, y: 35, width: titleRect.width - 35  , height: titleRect.height)
                 titleLabel.lineBreakMode = NSLineBreakMode.byTruncatingHead
             }
-
-       }else{
-        logInButton.isHidden = false
-        logOutButton.isHidden = true
-        titleLabel.frame = CGRect(x: logInButton.frame.maxX - 330, y: 35, width: titleRect.width , height: titleRect.height)
-       }
+            
+        }else{
+            logInButton.isHidden = false
+            logOutButton.isHidden = true
+            titleLabel.frame = CGRect(x: logInButton.frame.maxX - 330, y: 35, width: titleRect.width , height: titleRect.height)
+        }
     }
     
     // MARK: - EVENT
