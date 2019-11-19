@@ -19,6 +19,8 @@ class CustomView: UIView {
     /// 各種設定ボタン
     private let settingButton:UIButton = UIButton(type: UIButton.ButtonType.system)
     
+    private var loginFrag = false
+    
     /// 共通初期化処理
     public func commonInit() {
         
@@ -53,24 +55,53 @@ class CustomView: UIView {
     /// 格アイテムのレイアウト調整
     override func layoutSubviews() {
         super.layoutSubviews()
+        
+        /// 幅サイズ取得
+        let width:CGFloat = self.bounds.width
+        /// タイトルラベルサイズ取得
+        let titleRect: CGSize = titleLabel.sizeThatFits(CGSize(width: frame.width, height: CGFloat.greatestFiniteMagnitude))
+        /// ログインボタンサイズ取得
+        let logInRect: CGSize = logInButton.sizeThatFits(CGSize(width: frame.width, height: CGFloat.greatestFiniteMagnitude))
+        /// ログアウトボタンサイズ取得
+        let logOutRect: CGSize = logOutButton.sizeThatFits(CGSize(width: frame.width, height: CGFloat.greatestFiniteMagnitude))
+        /// 設定ボタンサイズ取得
+        let settingRect: CGSize = settingButton.sizeThatFits(CGSize(width: frame.width, height: CGFloat.greatestFiniteMagnitude))
+        
 
-        titleLabel.frame = CGRect(x: 10, y: 30, width: 300, height: 50)
-        logInButton.frame = CGRect(x: 260, y: 30, width: 100, height: 50)
-        logOutButton.frame = CGRect(x: 270, y: 30, width: 100, height: 50)
-        settingButton.frame = CGRect(x: 330, y: 30, width: 100, height: 50)
+        settingButton.frame = CGRect(x: width-70, y: 30, width: settingRect.width, height: settingRect.height)
+        
+        logInButton.frame = CGRect(x: settingButton.frame.maxX - 130,y:30,width:logInRect.width, height: logInRect.height)
+        
+        logOutButton.frame = CGRect(x: settingButton.frame.maxX - 145,y:30,width:logOutRect.width, height: logOutRect.height)
+        
+       ///ログイン状況によって表示方法を変える
+       if(loginFrag){
+        logInButton.isHidden = true
+        logOutButton.isHidden = false
+
+            if(width > 500){
+                titleLabel.frame = CGRect(x: logOutButton.frame.maxX - 350, y: 35, width: titleRect.width , height: titleRect.height)
+            }else{
+                titleLabel.frame = CGRect(x: logOutButton.frame.maxX - 300, y: 35, width: titleRect.width - 35  , height: titleRect.height)
+                titleLabel.lineBreakMode = NSLineBreakMode.byTruncatingHead
+            }
+
+       }else{
+        logInButton.isHidden = false
+        logOutButton.isHidden = true
+        titleLabel.frame = CGRect(x: logInButton.frame.maxX - 330, y: 35, width: titleRect.width , height: titleRect.height)
+       }
     }
     
     // MARK: - EVENT
     /// ログインボタンが押された
     @objc func pushLogIn(sender: UIButton){
-        logInButton.isHidden = true
-        logOutButton.isHidden = false
-        settingButton.frame = CGRect(x: 340, y: 30, width: 100, height: 50)
+        loginFrag = true
+        self.setNeedsLayout()
     }
     /// ログアウトボタンが押された
     @objc func pushLogOut(sender: UIButton){
-        logInButton.isHidden = false
-        logOutButton.isHidden = true
-        settingButton.frame = CGRect(x: 330, y: 30, width: 100, height: 50)
+        loginFrag = false
+        self.setNeedsLayout()
     }
 }
