@@ -9,7 +9,7 @@
 import UIKit
 
 class CustomView: UIView {
-
+    
     /// タイトルラベル
     private let titleLabel:UILabel = UILabel()
     /// ログインボタン
@@ -18,8 +18,6 @@ class CustomView: UIView {
     private let logOutButton:UIButton = UIButton(type: UIButton.ButtonType.system)
     /// 各種設定ボタン
     private let settingButton:UIButton = UIButton(type: UIButton.ButtonType.system)
-    
-    private var loginFrag = false
     
     /// 共通初期化処理
     public func commonInit() {
@@ -30,6 +28,7 @@ class CustomView: UIView {
         titleLabel.text = "前回ログイン日時2019/11/0712:00:00"
         titleLabel.font = UIFont.systemFont(ofSize: 16)
         titleLabel.textColor = UIColor.black
+        titleLabel.lineBreakMode = NSLineBreakMode.byTruncatingHead
         /// ログインボタンを作成
         logInButton.setTitle("ログイン",for: .normal)
         logInButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
@@ -41,7 +40,7 @@ class CustomView: UIView {
         /// 各種設定ボタンを作成
         settingButton.setTitle("各種設定", for: .normal)
         settingButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
-                
+        
         self.addSubview(titleLabel)
         self.addSubview(logInButton)
         self.addSubview(logOutButton)
@@ -67,41 +66,43 @@ class CustomView: UIView {
         /// 設定ボタンサイズ取得
         let settingRect: CGSize = settingButton.sizeThatFits(CGSize(width: frame.width, height: CGFloat.greatestFiniteMagnitude))
         
+        //実際に反映する
+        var x = width   // xは右端
         
-        settingButton.frame = CGRect(x: width - (settingRect.width + 10), y: 30, width: settingRect.width, height: settingRect.height)
+        x -= 10 // 右端のスキマ分
+        x -= settingRect.width
         
-        logInButton.frame = CGRect(x: settingButton.frame.maxX - 130,y:30,width:logInRect.width, height: logInRect.height)
+        settingButton.frame = CGRect(x: x,y:30,width: settingRect.width, height: settingRect.height)
         
-        logOutButton.frame = CGRect(x: settingButton.frame.maxX - 145,y:30,width:logOutRect.width, height: logOutRect.height)
-        
-        ///ログイン状況によって表示方法を変える
-        if(loginFrag){
-            logInButton.isHidden = true
-            logOutButton.isHidden = false
-            
-            if(width > 500){
-                titleLabel.frame = CGRect(x: logOutButton.frame.maxX - 350, y: 35, width: titleRect.width , height: titleRect.height)
-            }else{
-                titleLabel.frame = CGRect(x: logOutButton.frame.maxX - 300, y: 35, width: titleRect.width - 35  , height: titleRect.height)
-                titleLabel.lineBreakMode = NSLineBreakMode.byTruncatingHead
-            }
-            
-        }else{
-            logInButton.isHidden = false
-            logOutButton.isHidden = true
-            titleLabel.frame = CGRect(x: logInButton.frame.maxX - 330, y: 35, width: titleRect.width , height: titleRect.height)
+        if logInButton.isHidden == false {
+            x -= 10
+            x -= logInRect.width
+            logInButton.frame   = CGRect(x: x, y:30,width: logInRect.width,   height: logInRect.height)
         }
+        
+        if logOutButton.isHidden == false {
+            x -= 10
+            x -= logOutRect.width
+            logOutButton.frame  = CGRect(x: x, y:30,width: logOutRect.width,  height: logOutRect.height)
+        }
+        
+        x -= 10
+        
+        titleLabel.frame = CGRect(x:  10, y:35, width: x - 10,  height: titleRect.height)
+        
     }
     
     // MARK: - EVENT
     /// ログインボタンが押された
     @objc func pushLogIn(sender: UIButton){
-        loginFrag = true
+        logInButton.isHidden = true
+        logOutButton.isHidden = false
         self.setNeedsLayout()
     }
     /// ログアウトボタンが押された
     @objc func pushLogOut(sender: UIButton){
-        loginFrag = false
+        logInButton.isHidden = false
+        logOutButton.isHidden = true
         self.setNeedsLayout()
     }
 }
