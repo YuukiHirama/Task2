@@ -19,11 +19,9 @@ class CustomView: UIView {
     /// 各種設定ボタン
     private let settingButton:UIButton = UIButton(type: UIButton.ButtonType.system)
     
-    /// 共通初期化処理
-    public func commonInit() {
-        
-        self.isUserInteractionEnabled = true
-        
+    /// 初期化処理
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         /// タイトルラベル初期化
         titleLabel.text = "前回ログイン日時2019/11/0712:00:00"
         titleLabel.font = UIFont.systemFont(ofSize: 16)
@@ -49,6 +47,10 @@ class CustomView: UIView {
         // ボタン初期表示
         logInButton.isHidden = false
         logOutButton.isHidden = true
+    }
+    // 必須イニシャライザ（指定イニシャライザ）
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
     }
     
     /// 格アイテムのレイアウト調整
@@ -77,13 +79,13 @@ class CustomView: UIView {
         if logInButton.isHidden == false {
             x -= 10
             x -= logInRect.width
-            logInButton.frame   = CGRect(x: x, y:30,width: logInRect.width,   height: logInRect.height)
+            logInButton.frame = CGRect(x: x, y:30,width: logInRect.width, height: logInRect.height)
         }
         
         if logOutButton.isHidden == false {
             x -= 10
             x -= logOutRect.width
-            logOutButton.frame  = CGRect(x: x, y:30,width: logOutRect.width,  height: logOutRect.height)
+            logOutButton.frame = CGRect(x: x, y:30,width: logOutRect.width, height: logOutRect.height)
         }
         
         x -= 10
